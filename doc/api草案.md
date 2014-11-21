@@ -9,10 +9,7 @@ POST /companies/validate 验证某个属性是否有效（邮箱，邀请码，�
 GET /companies/:id/teams 获取公司小队数据  
 GET /companies/:id/members 获取公司成员列表  
 GET /companies/:id/departments 获取部门数据  
-
-###使用场景：
-注册时，填写完表单后，`POST /companies`。通过激活邮件进入设置用户名密码的页面，`PUT /companies/:id`，然后完成注册。(创建用户名密码待商榷)
-
+GET /companies/:id/tags  
 
 ## user
 POST /users 注册用户  
@@ -25,6 +22,11 @@ POST /teams 创建小队
 GET /teams/:id 获取小队数据  
 PUT /teams/:id 修改小队数据  
 DELETE /teams/:id 关闭小队  
+
+POST /teams/:id/family_photos 上传全家福  
+GET /teams/:id/family_photos 获取小队全家福  
+PUT /teams/:id/family_photos/:familyPhotoId 修改全家福照片（选择或取消选择）  
+DELETE /teams/:id/family_photos/:familyPhotoId 删除全家福照片  
 
 PUT /teams/:id/users/:userId 加入小队  
 DELETE /teams/:id/users/:userId 退出小队  
@@ -47,6 +49,10 @@ DELETE /campaigns/:id 关闭活动
 
 PUT /campaigns/:id/users/:userId 参加活动  
 DELETE /campaigns/:id/users/:userId 退出活动  
+应战拒绝待定
+
+## timeline
+GET /timelines 获取足迹
 
 ## photo_album
 POST /photo_albums 创建相册  
@@ -66,25 +72,20 @@ GET /comments 获取评论
 PUT /comments/:id 修改评论  
 DELETE /comments/:id 删除评论  
 
+## report
+POST /report 举报  
+
 ## message
 POST /messages 发站内信  
 GET /messages 获取站内信  
 PUT /messages/:id 修改站内信数据  
 DELETE /messages/:id 删除站内信  
 
-## inventcode
-POST /inventcode 创建一个邀请码  
-DELETE /inventcode/:id 删除邀请码  
-
 ## search
-GET /search 搜索  
+GET /search 搜索(待定)  
 
 ## region
 GET /region 获取区域数据（省市区）  
 
-## logo
-GET /logo 获取logo  
-PUT /logo 修改logo  
-
-## tags
-GET /tags 获取tags  
+## oauth
+待定  
