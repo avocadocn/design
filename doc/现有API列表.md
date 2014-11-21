@@ -263,3 +263,4 @@ res: {
   }]
 }
 ```
+## GET /company/timeLine/:companyId 获取公司timeline
