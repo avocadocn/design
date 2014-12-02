@@ -14,7 +14,7 @@ GET /companies/:id/tags
 ## user
 POST /users 注册用户  
 GET /users/:id 获取用户数据  
-PUT /users/:id 修改用户数据（昵称、密码等基本信息)  
+PUT /users/:id 修改用户数据（昵称、密码、头像、消息提醒设置等基本信息)  
 DELETE /users/:id 屏蔽用户  
 
 ## team
