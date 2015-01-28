@@ -20,19 +20,28 @@ get /campaigns?query 获取活动列表(在现在基础上添加功能)
 CircleContent:
 ```coffeescript
 CircleContent = new Schema
-    content: String # 文本内容
+    cid:
+        type: Schema.Types.ObjectId # 所属公司id
+        required: true
+    tid: [Schema.Types.ObjectId] # 关联的小队id(可选，不是必要的)
+    campaign_id: Schema.Types.ObjectId # 关联的活动id(可选，不是必要的)
+    content: String # 文本内容(content和photos至少要有一个)
     photos: [{
         uri: String
         width: Number
         height: Number
     }] # 照片列表
-    post_user: Schema.Types.ObjectId # 发消息的用户的id（头像和昵称再次查询）
+    post_user:
+        type: Schema.Types.ObjectId # 发消息的用户的id（头像和昵称再次查询）
+        required: true
     post_date:
         type: Date
         default: Date.now
+        required: true
     status:
         type: String
         enum: ['show', 'delete']
+        required: true
         default: 'show'
     comment_users: [Schema.Types.ObjectId] # 参与过评论的用户id
 ```
@@ -44,13 +53,19 @@ CircleComment = new Schema
     kind:
         type: String
         enum: ['comment', 'appreciate']
+        required: true
     content: String
-    is_only_to_content: # 是否仅仅是回复消息，而不是对用户
+    is_only_to_content: # 是否仅仅是回复消息，而不是对用户(影响显示)
         type: Boolean
         default: true
-    target_content_id: Schema.Types.ObjectId # 评论目标消息的id
-    target_user_id: Schema.Types.ObjectId # 评论目标用户的id
-    post_user: Schema.Types.ObjectId # 发消息的用户的id（头像和昵称再次查询）
+        required: true
+    target_content_id:
+        type: Schema.Types.ObjectId # 评论目标消息的id
+        required: true
+    target_user_id:
+        type: Schema.Types.ObjectId # 评论目标用户的id(直接回复消息则保存消息发布者的id)
+        required: true
+    post_user: Schema.Types.ObjectId # 发评论或赞的用户的id（头像和昵称再次查询）
     post_date:
         type: Date
         default: Date.now
@@ -68,12 +83,19 @@ CircleRemind = new Schema
     msg_list: [{
         kind:
             type: String
-            enum: ['newComment', 'newAppreciate'] # 类型：新消息，新评论，新提醒
-        post_user:
-            _id: Schema.Types.ObjectId
-            photo: String
-            nickname: String
-        content: String
+            enum: ['newComment', 'newAppreciate'] # 类型：新的评论或赞
+            required: true
+        post_user: # 发赞或评论的用户
+            _id:
+                type: Schema.Types.ObjectId
+                required: true
+            photo:
+                type: String
+                required: true
+            nickname:
+                type: String
+                required: true
+        content: String # 评论内容
     }], # 可设置上限
     clear_date: Date # 上次清空消息列表的时间
 ```
