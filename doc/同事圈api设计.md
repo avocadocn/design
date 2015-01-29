@@ -15,7 +15,7 @@ get /teams?query 获取小队列表(在现在基础上添加功能)
 get /campaigns?query 获取活动列表(在现在基础上添加功能)  
 
 ## 数据模型
-新添加3个集合: CircleContent, CircleComment, CircleRemind.
+新添加2个集合: CircleContent, CircleComment.
 
 CircleContent:
 ```coffeescript
@@ -31,7 +31,7 @@ CircleContent = new Schema
         width: Number
         height: Number
     }] # 照片列表
-    post_user:
+    post_user_id:
         type: Schema.Types.ObjectId # 发消息的用户的id（头像和昵称再次查询）
         required: true
     post_date:
@@ -43,7 +43,7 @@ CircleContent = new Schema
         enum: ['show', 'delete']
         required: true
         default: 'show'
-    comment_users: [Schema.Types.ObjectId] # 参与过评论的用户id
+    comment_user_ids: [Schema.Types.ObjectId] # 参与过评论的用户id
 ```
 
 CircleComment:
@@ -65,7 +65,12 @@ CircleComment = new Schema
     target_user_id:
         type: Schema.Types.ObjectId # 评论目标用户的id(直接回复消息则保存消息发布者的id)
         required: true
-    post_user: Schema.Types.ObjectId # 发评论或赞的用户的id（头像和昵称再次查询）
+    post_user_cid:
+        type: Schema.Types.ObjectId # 发评论或赞的用户的公司id
+        required: true
+    post_user_id:
+        type: Schema.Types.ObjectId # 发评论或赞的用户的id（头像和昵称再次查询）
+        required: true
     post_date:
         type: Date
         default: Date.now
@@ -75,27 +80,37 @@ CircleComment = new Schema
         default: 'show'
 ```
 
-CircleRemind:
-```coffeescript
-CircleRemind = new Schema
-    uid: Schema.Types.ObjectId # 消息提醒列表所有者id
-    has_new_content: Boolean # 有没有同事发新消息
-    msg_list: [{
-        kind:
-            type: String
-            enum: ['newComment', 'newAppreciate'] # 类型：新的评论或赞
-            required: true
-        post_user: # 发赞或评论的用户
-            _id:
-                type: Schema.Types.ObjectId
-                required: true
-            photo:
-                type: String
-                required: true
-            nickname:
-                type: String
-                required: true
-        content: String # 评论内容
-    }], # 可设置上限
-    clear_date: Date # 上次清空消息列表的时间
+在Users模型中添加如下属性:
+```javascript
+// 有没有同事发新消息, 如果已经为true了再有新消息，则不要再写入更新，在查询时设置条件过滤
+has_new_content: {
+  type: Boolean,
+  default: false
+},
+msg_list: [{
+  // 类型：新的评论或赞
+  kind: {
+    type: String,
+    enum: ['newComment', 'newAppreciate'],
+    required: true
+  },
+
+  // 发赞或评论的用户
+  post_user: {
+    _id: {
+      type: Schema.Types.ObjectId,
+      required: true
+    },
+    photo: {
+      type: String,
+      required: true
+    },
+    nickname: {
+      type: String,
+      required: true
+    }
+  },
+  content: String // 评论内容
+}],
+clear_date: Date // 上次清空提醒列表的时间
 ```
