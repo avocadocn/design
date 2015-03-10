@@ -6,13 +6,13 @@ delete /circle_contents/:contentId 删除已发消息
 post /circle_contents/:contentId/comments 评论或赞  
 delete /circle_contents/:contentId/comments/:commentId 撤消评论或取消赞  
 
-get /circle_reminds?has_new=true 获取是否有最新消息  
-get /circle_reminds?userId=xx 获取同事圈提醒(被赞、被评论、赞过或评论过的消息有更新)  
-get /circle_messages 获取个人消息列表  
+get /circle_reminds 获取是否有最新消息  
+get /circle_reminds/comments 获取同事圈提醒(被赞、被评论、赞过或评论过的消息有更新)  
+delete /circle_reminds/comments 删除同事圈提醒  
 
 ## 辅助api
-get /teams?query 获取小队列表(在现在基础上添加功能)  
-get /campaigns?query 获取活动列表(在现在基础上添加功能)  
+~~get /teams?query 获取小队列表(在现在基础上添加功能)~~
+~~get /campaigns?query 获取活动列表(在现在基础上添加功能)~~ 
 
 ## 数据模型
 新添加2个集合: CircleContent, CircleComment.
@@ -43,7 +43,23 @@ CircleContent = new Schema
         enum: ['show', 'delete']
         required: true
         default: 'show'
-    comment_user_ids: [Schema.Types.ObjectId] # 参与过评论的用户id
+    appreciated: # 发布者是否点赞
+        type: Boolean
+        default: false
+        required: true
+    comment_user: [user] # 参与过评论的用户(除消息发布者)
+    relative_cids: [Schema.Types.ObjectId] # 参加同事圈消息所属的活动的所有公司id
+user # user组件
+    _id: 
+        type: Schema.Types.ObjectId
+        required: true
+    comment_num:
+        type: Number
+        required: true
+    appreciated: # 参与评论者是否点赞
+        type: Boolean
+        default: false
+        required: true
 ```
 
 CircleComment:
@@ -76,7 +92,16 @@ CircleComment = new Schema
         default: Date.now
     status:
         type: String
-        enum: ['show', 'delete']
+        enum: ['show', 'delete', 'content_delete']
+        default: 'show'
+    relative_user: [user] # 与该评论相关的用户集合
+user # user组件
+    _id: 
+        type: Schema.Types.ObjectId,
+        required: true
+    list_status: # 评论消息列表显示状态
+        type: String,
+        enum: ['show', 'delete'],
         default: 'show'
 ```
 
@@ -87,30 +112,15 @@ has_new_content: {
   type: Boolean,
   default: false
 },
-msg_list: [{
-  // 类型：新的评论或赞
-  kind: {
-    type: String,
-    enum: ['newComment', 'newAppreciate'],
-    required: true
-  },
+new_comment_num: {
+  type: Number,
+  default: 0
+},
 
-  // 发赞或评论的用户
-  post_user: {
-    _id: {
-      type: Schema.Types.ObjectId,
-      required: true
-    },
-    photo: {
-      type: String,
-      required: true
-    },
-    nickname: {
-      type: String,
-      required: true
-    }
-  },
-  content: String // 评论内容
-}],
-clear_date: Date // 上次清空提醒列表的时间
+// 最新发赞或评论的用户
+new_comment_user: {
+  _id: Schema.Types.ObjectId,
+  photo: String,
+  nickname: String
+}
 ```
