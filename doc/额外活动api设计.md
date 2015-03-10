@@ -11,8 +11,8 @@ post /activity/:activityId 用户注册信息
 新添加2个集合: Activity, ActivityUser.
 
 Activity:
-   名称   |  属性 |   描述 
----------|-------|------
+|   名称   |  属性 |   描述 |
+|---------|-------|------|
 pid|Schema.Types.ObjectId `required: true`|发布者id
 active|Boolean `default: true` `requried: true`|活动状态
 theme|String `requried: true`|活动主题
@@ -35,7 +35,7 @@ department|Boolean `default: false` `requried: true`|部门名称（可选）
 users|Array|用户组件
 
 user组件
-   名称   |  属性 |   描述 
+|   名称   |  属性 |   描述 |
 ---------|-------|------
 _id|Schema.Types.ObjectId `required: true`|注册用户id
 check_status|Boolean `default: false` `required: true`|审核状态
@@ -43,7 +43,7 @@ sign_status|Boolean `default: false` `required: true`|签到状态
 
 
 ActivityUser:
-   名称   |  属性 |   描述 
+|   名称   |  属性 |   描述 |
 ---------|-------|------
 activity_id|Schema.Types.ObjectId|额外活动id（必填）
 realname|String|真实姓名（必填）
