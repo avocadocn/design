@@ -15,15 +15,14 @@ Activity:
 |   名称   |  属性 |   描述  |
 |---------|-------|------|
 pid|Schema.Types.ObjectId `required: true`|发布者id
-active|Boolean `default: true` `requried: true`|活动状态
-theme|String `requried: true`|活动主题
-introduction|String `requried: true`|活动简介
-member_num|Number `requried: true`|活动额定人数
-member_num_remained|Number `requried: true`|活动剩余人数
-create_time|Date `default: Date.now`|活动创建时间
-start_time|Date `requried: true`|活动开始时间
-end_time|Date `requried: true`|活动结束时间
-activity_id|Boolean `default: false` `requried: true`|额外活动id（必填）
+active|Boolean `default: true` `requried: true`|状态
+theme|String `requried: true`|主题
+introduction|String `requried: true`|简介
+member_num|Number `requried: true`|额定人数
+member_num_remained|Number `requried: true`|剩余人数
+create_time|Date `default: Date.now`|创建时间
+start_time|Date `requried: true`|开始时间
+end_time|Date `requried: true`|结束时间
 realname|Boolean `default: false` `requried: true`|真实姓名（必填）
 identity_card|Boolean `default: false` `requried: true`|身份证id（必填）
 email|Boolean `default: false` `requried: true`|邮箱（必填）

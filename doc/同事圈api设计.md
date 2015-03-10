@@ -61,6 +61,29 @@ user # user组件
         default: false
         required: true
 ```
+CircleContent
+
+名称   |  属性 |   描述  
+---------|-------|------
+cid|Schema.Types.ObjectId `required: true`|所属公司id
+tid|Array[Schema.Types.ObjectId]|关联的小队id
+campaign_id|Schema.Types.ObjectId `requried: true`|关联的活动id
+content|String|文本内容
+photos|[{uri: String width: Number height: Number}]|照片列表
+post_user_id|Schema.Types.ObjectId `requried: true`|发消息的用户的id
+post_date|Date `default: Date.now` `requried: true`|创建时间
+status|String `enum: ['show', 'delete']` `default: show`|状态
+appreciated|Boolean `default: false` `requried: true`|发布者是否点赞
+comment_user|Boolean `default: false` `requried: true`|参与过评论的用户(除消息发布者)组件
+relative_cids|[Schema.Types.ObjectId]|参加同事圈消息所属的活动的所有公司id
+
+user组件(comment_user)
+
+名称   |  属性 |   描述  
+---------|-------|------
+_id|Schema.Types.ObjectId `required: true`|评论用户id
+comment_num|Number|评论次数
+appreciated|Boolean `default: false` `requried: true`|参与评论者是否点赞
 
 CircleComment:
 ```coffeescript
