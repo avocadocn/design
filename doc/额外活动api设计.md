@@ -10,25 +10,39 @@ post /activity/:activityId 用户注册信息
 ## 数据模型
 新添加2个集合: Activity, ActivityUser.
 
+Activity:
 
-```javascript
-// 有没有同事发新消息, 如果已经为true了再有新消息，则不要再写入更新，在查询时设置条件过滤
-has_new_content: {
-  type: Boolean,
-  default: false
-},
-new_comment_num: {
-  type: Number,
-  default: 0
-},
+|   名称   |  属性 |   描述  |
+|---------|-------|------|
+pid|Schema.Types.ObjectId `required: true`|发布者id
+active|Boolean `default: true` `requried: true`|活动状态
+theme|String `requried: true`|活动主题
+introduction|String `requried: true`|活动简介
+member_num|Number `requried: true`|活动额定人数
+member_num_remained|Number `requried: true`|活动剩余人数
+create_time|Date `default: Date.now`|活动创建时间
+start_time|Date `requried: true`|活动开始时间
+end_time|Date `requried: true`|活动结束时间
+activity_id|Boolean `default: false` `requried: true`|额外活动id（必填）
+realname|Boolean `default: false` `requried: true`|真实姓名（必填）
+identity_card|Boolean `default: false` `requried: true`|身份证id（必填）
+email|Boolean `default: false` `requried: true`|邮箱（必填）
+phone|Boolean `default: false` `requried: true`|手机（必填）
+sex|Boolean `default: false` `requried: true`|性别（可选）
+birthday|Boolean `default: false` `requried: true`|生日（可选）
+qq|Boolean `default: false` `requried: true`|qq（可选）
+cname|Boolean `default: false` `requried: true`|公司名称（可选）
+department|Boolean `default: false` `requried: true`|部门名称（可选）
+users|Array|用户组件
 
-// 最新发赞或评论的用户
-new_comment_user: {
-  _id: Schema.Types.ObjectId,
-  photo: String,
-  nickname: String
-}
-```
+user组件
+
+|   名称   |  属性 |   描述 |
+---------|-------|------
+_id|Schema.Types.ObjectId `required: true`|注册用户id
+check_status|Boolean `default: false` `required: true`|审核状态
+sign_status|Boolean `default: false` `required: true`|签到状态
+
 ActivityUser
 
 |   名称   |  属性 |   描述 |
