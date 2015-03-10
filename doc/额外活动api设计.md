@@ -1,11 +1,11 @@
 # 额外活动api设计
 ## 基本api
-post /activity Publisher发布活动 
-get /activity Publisher获取活动信息
-get /activity/:activityId/activiy_user/:activiyUserId Publisher审核
+post /activity Publisher发布活动  
+get /activity Publisher获取活动信息  
+get /activity/:activityId/activiy_user/:activiyUserId Publisher审核  
 
-get /activity/:activityId 用户获取活动信息(途径：链接、二维码)
-post /activity/:activityId 用户注册信息 
+get /activity/:activityId 用户获取活动信息(途径：链接、二维码)  
+post /activity/:activityId 用户注册信息  
 
 ## 数据模型
 新添加2个集合: Activity, ActivityUser.
