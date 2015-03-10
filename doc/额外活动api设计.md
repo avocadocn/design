@@ -29,6 +29,7 @@ new_comment_user: {
   nickname: String
 }
 ```
+ActivityUser
 |   名称   |  属性 |   描述 |
 ---------|-------|------
 activity_id|Schema.Types.ObjectId|额外活动id（必填）
