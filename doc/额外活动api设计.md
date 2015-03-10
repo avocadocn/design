@@ -11,9 +11,24 @@ post /activity/:activityId 用户注册信息
 新添加2个集合: Activity, ActivityUser.
 
 
+```javascript
+// 有没有同事发新消息, 如果已经为true了再有新消息，则不要再写入更新，在查询时设置条件过滤
+has_new_content: {
+  type: Boolean,
+  default: false
+},
+new_comment_num: {
+  type: Number,
+  default: 0
+},
 
-
-ActivityUser:
+// 最新发赞或评论的用户
+new_comment_user: {
+  _id: Schema.Types.ObjectId,
+  photo: String,
+  nickname: String
+}
+```
 |   名称   |  属性 |   描述 |
 ---------|-------|------
 activity_id|Schema.Types.ObjectId|额外活动id（必填）
