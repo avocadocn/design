@@ -1,14 +1,14 @@
 # 同事圈api设计
 ## 基本api
 post /circle_contents 发新消息  
-get /circle_contents 获取最新消息  
+get /circle_contents 获取最新或最早消息  
 delete /circle_contents/:contentId 删除已发消息  
 post /circle_contents/:contentId/comments 评论或赞  
 delete /circle_contents/:contentId/comments/:commentId 撤消评论或取消赞  
 
-get /circle_reminds 获取是否有最新消息  
+~~get /circle_reminds 获取是否有最新消息~~  
 get /circle_reminds/comments 获取同事圈提醒(被赞、被评论、赞过或评论过的消息有更新)  
-delete /circle_reminds/comments 删除同事圈提醒  
+~~delete /circle_reminds/comments 删除同事圈提醒~~  
 
 ## 辅助api
 ~~get /teams?query 获取小队列表(在现在基础上添加功能)~~  
@@ -61,29 +61,6 @@ user # user组件
         default: false
         required: true
 ```
-CircleContent
-
-名称   |  属性 |   描述  
----------|-------|------
-cid|Schema.Types.ObjectId `required: true`|所属公司id
-tid|Array[Schema.Types.ObjectId]|关联的小队id
-campaign_id|Schema.Types.ObjectId `requried: true`|关联的活动id
-content|String|文本内容
-photos|[{uri: String width: Number height: Number}]|照片列表
-post_user_id|Schema.Types.ObjectId `requried: true`|发消息的用户的id
-post_date|Date `default: Date.now` `requried: true`|创建时间
-status|String `enum: ['show', 'delete']` `default: show`|状态
-appreciated|Boolean `default: false` `requried: true`|发布者是否点赞
-comment_user|Boolean `default: false` `requried: true`|参与过评论的用户(除消息发布者)组件
-relative_cids|[Schema.Types.ObjectId]|参加同事圈消息所属的活动的所有公司id
-
-user组件(comment_user)
-
-名称   |  属性 |   描述  
----------|-------|------
-_id|Schema.Types.ObjectId `required: true`|评论用户id
-comment_num|Number|评论次数
-appreciated|Boolean `default: false` `requried: true`|参与评论者是否点赞
 
 CircleComment:
 ```coffeescript
@@ -117,33 +94,5 @@ CircleComment = new Schema
         type: String
         enum: ['show', 'delete', 'content_delete']
         default: 'show'
-    relative_user: [user] # 与该评论相关的用户集合
-user # user组件
-    _id: 
-        type: Schema.Types.ObjectId,
-        required: true
-    list_status: # 评论消息列表显示状态
-        type: String,
-        enum: ['show', 'delete'],
-        default: 'show'
 ```
 
-在Users模型中添加如下属性:
-```javascript
-// 有没有同事发新消息, 如果已经为true了再有新消息，则不要再写入更新，在查询时设置条件过滤
-has_new_content: {
-  type: Boolean,
-  default: false
-},
-new_comment_num: {
-  type: Number,
-  default: 0
-},
-
-// 最新发赞或评论的用户
-new_comment_user: {
-  _id: Schema.Types.ObjectId,
-  photo: String,
-  nickname: String
-}
-```
