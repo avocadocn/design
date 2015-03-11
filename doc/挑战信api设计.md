@@ -1,11 +1,11 @@
 # 挑战信api设计
 ## 基本api
-post /competition_messages 发挑战信
-get /competition_messages 获取挑战信（个人/小队，发出/收到的挑战日志）
-put /competition_messages/:messageId 接受/拒绝挑战
+post /competition_messages 发挑战信  
+get /competition_messages 获取挑战信（个人/小队，发出/收到的挑战日志）  
+put /competition_messages/:messageId 接受/拒绝挑战  
 
 ##辅助api
-components:
+components:  
 post /components/vote 投票
 
 ## 数据模型

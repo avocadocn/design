@@ -6,7 +6,7 @@
 ## company API
 ### POST /companies 创建一个公司
 request body:
-```json
+```javascript
 {
   "name": "Donler Test Company", // 公司全称
   // 简称？
