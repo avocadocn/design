@@ -6,8 +6,8 @@ post /circle_contents/:contentId/comments 评论或赞
 ~~delete /circle_contents/:contentId/comments/:commentId 撤消评论或取消赞~~  
 delete /circle_comments/:commentId 撤消评论或取消赞  
 get /circle/company 获取公司消息及评论  
-get /circle/campaign 获取活动消息及评论  
-get /circle/team 获取个人小队消息及评论  
+get /circle/campaign/:campaignId 获取活动消息及评论  
+get /circle/team/:teamId 获取个人小队消息及评论  
 
 ~~get /circle_reminds 获取是否有最新消息~~  
 get /circle_reminds/comments 获取同事圈提醒(被赞、被评论、赞过或评论过的消息有更新)  
