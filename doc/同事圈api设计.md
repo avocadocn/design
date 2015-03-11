@@ -1,14 +1,14 @@
 # 同事圈api设计
 ## 基本api
 post /circle_contents 发新消息  
-get /circle_contents 获取最新消息  
+get /circle_contents 获取最新或最早消息  
 delete /circle_contents/:contentId 删除已发消息  
 post /circle_contents/:contentId/comments 评论或赞  
 delete /circle_contents/:contentId/comments/:commentId 撤消评论或取消赞  
 
-get /circle_reminds 获取是否有最新消息  
+~~get /circle_reminds 获取是否有最新消息~~  
 get /circle_reminds/comments 获取同事圈提醒(被赞、被评论、赞过或评论过的消息有更新)  
-delete /circle_reminds/comments 删除同事圈提醒  
+~~delete /circle_reminds/comments 删除同事圈提醒~~  
 
 ## 辅助api
 ~~get /teams?query 获取小队列表(在现在基础上添加功能)~~  
@@ -94,33 +94,5 @@ CircleComment = new Schema
         type: String
         enum: ['show', 'delete', 'content_delete']
         default: 'show'
-    relative_user: [user] # 与该评论相关的用户集合
-user # user组件
-    _id: 
-        type: Schema.Types.ObjectId,
-        required: true
-    list_status: # 评论消息列表显示状态
-        type: String,
-        enum: ['show', 'delete'],
-        default: 'show'
 ```
 
-在Users模型中添加如下属性:
-```javascript
-// 有没有同事发新消息, 如果已经为true了再有新消息，则不要再写入更新，在查询时设置条件过滤
-has_new_content: {
-  type: Boolean,
-  default: false
-},
-new_comment_num: {
-  type: Number,
-  default: 0
-},
-
-// 最新发赞或评论的用户
-new_comment_user: {
-  _id: Schema.Types.ObjectId,
-  photo: String,
-  nickname: String
-}
-```

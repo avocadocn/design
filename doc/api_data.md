@@ -6,7 +6,7 @@
 ## company API
 ### POST /companies 创建一个公司
 request body:
-```json
+```javascript
 {
   "name": "Donler Test Company", // 公司全称
   // 简称？
@@ -25,12 +25,13 @@ request body:
   "invite_code": "1A2B3C4D"
 }
 ```
-response
-```
+response  
 成功时返回:
+```javascript
 Status Code: 201
-
+```
 请求数据不合法时返回:
+```javascript
 Status Code: 400
 Response Body:
 {
@@ -38,17 +39,19 @@ Response Body:
   "phone": "手机号码必须是11位的阿拉伯数字",
   "invite_code": "该邀请码是一个无效的邀请码"
 }
-
+```
 服务器异常:
+```javascript
 Status Code: 500
 ```
 ### GET /companies/53aa6fc011fd597b3e1be250 获取公司数据
-response:
-```
+response:  
 成功时返回:
+```javascript
 Status Code: 200
-
+```
 HR身份得到的数据：
+```javascript
 {
   "_id": "53aa6fc011fd597b3e1be250",
   "username": "donler_test",
@@ -73,8 +76,9 @@ HR身份得到的数据：
   "register_invite_codes": ["3A4B5C6D", "3A4F5C6D"],
   "invite_key": "6FC8AB3D"
 }
-
+```
 公司员工得到的数据:
+```javascript
 {
   "_id": "53aa6fc011fd597b3e1be250",
   "email_domains": ["donler.com", "55yali.com"],
