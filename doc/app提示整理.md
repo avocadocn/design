@@ -1,27 +1,27 @@
 # APP红点/数字/通知提示整理
 ##讨论
 1.Tab上"讨论"的红点提示  
-  进入APP时 http请求、socket实时更新  
+&emsp;进入APP时 http请求、socket实时更新  
 2.讨论列表各聊天室红点、数字  
-  进入页面时、后台到前台时 http请求、socket实时更新  
+&emsp;进入页面时、后台到前台时 http请求、socket实时更新  
 3.讨论详情页  
-  socket实时更新  
+&emsp;socket实时更新  
 
 ##同事圈
 1.Tab上"公司"的红点提示  
-  进入APP时 http请求、socket实时更新  
+&emsp;进入APP时 http请求、socket实时更新  
 2.在公司页面"同事圈"一栏上显示红点及头像(若有新同事圈)及数字(若有新评论)  
-  进入此页面 http请求、socket实时更新  
+&emsp;进入此页面 http请求、socket实时更新  
 3.在同事圈详情页最上方通知栏内显示新评论人及其头像  
-  进入此页面 http请求、socket实时更新  
+&emsp;进入此页面 http请求、socket实时更新  
 
 ##挑战信
 1.Tab上"发现"的红点提示  
-  进入APP时 http请求、socket实时更新  
+&emsp;进入APP时 http请求、socket实时更新  
 2."发现"页面"挑战日志"一栏显示红点  
-  进入此页面 http请求、socket实时更新  
+&emsp;进入此页面 http请求、socket实时更新  
 2."发现"->"挑战日志"页面显示哪个挑战信有了新评论或哪个是新的挑战信  
-  进入此页面 http请求  
+&emsp;进入此页面 http请求  
 
 #附
 ##需要socket通知的功能
