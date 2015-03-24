@@ -20,7 +20,7 @@
 &emsp;进入APP时 http请求、socket实时更新  
 2."发现"页面"挑战日志"一栏显示红点  
 &emsp;进入此页面 http请求、socket实时更新  
-2."发现"->"挑战日志"页面显示哪个挑战信有了新评论或哪个是新的挑战信  
+3."发现"->"挑战日志"页面显示哪个挑战信有了新评论或哪个是新的挑战信  
 &emsp;进入此页面 http请求  
 
 #附
@@ -39,5 +39,5 @@
 综上,需要查4个数据并传到前台,暂且定为:  
 1)newChat : boolean     //是否有新讨论(聊天)  
 2)newDisover : boolean  //是否有新挑战信或挑战信评论  
-4)newCircleContent : boolean //是否有新同事圈  
-5)newCircleComment : number //是否有同事圈评论  
+3)newCircleContent : boolean //是否有新同事圈  
+4)newCircleComment : number //是否有同事圈评论  
