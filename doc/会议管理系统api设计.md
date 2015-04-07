@@ -1,16 +1,17 @@
 # 额外活动api设计
 ## 基本api
-post /activity Publisher发布活动  
-get /activity Publisher获取活动信息  
-get /activity/:activityId/activiy_user/:activiyUserId Publisher审核  
+post /conference Publisher发布会议活动  
+get /conference Publisher获取会议活动信息  
+get /conference/manager/:conferenceId Publisher获取指定会议活动信息  
+put /conference/:conferenceId/conferenceUser/:conferenceUserId Publisher审核报名人员  
 
-get /activity/:activityId 用户获取活动信息(途径：链接、二维码)  
-post /activity/:activityId 用户注册信息  
+get /conference/:conferenceId 用户获取会议活动信息  
+post /conference/:conferenceId 用户注册信息  
 
 ## 数据模型
-新添加2个集合: Activity, ActivityUser.
+新添加2个集合: Conference, ConferenceUser.
 
-Activity:
+Conference:
 
 |   名称   |  属性 |   描述  |
 |---------|-------|------|
@@ -42,7 +43,7 @@ _id|Schema.Types.ObjectId `required: true`|注册用户id
 check_status|Boolean `default: false` `required: true`|审核状态
 sign_status|Boolean `default: false` `required: true`|签到状态
 
-ActivityUser
+ConferenceUser
 
 |   名称   |  属性 |   描述 |
 ---------|-------|------
