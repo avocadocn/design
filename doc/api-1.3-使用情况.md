@@ -111,7 +111,7 @@
 
 * `get /companies/:companyId` - [app]获取公司资料
 
-* `put /companies/:companyId` - [app]获取公司数据
+* `put /companies/:companyId` - [app]修改公司数据
 
 * `put /companies/:companyId/companyCover` - [app]修改公司封面
 
