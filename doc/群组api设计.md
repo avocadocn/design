@@ -1,14 +1,22 @@
 # 群组api设计
 ## 基本api
-post /teams 发新群组
-delete /teams/:teamId 删除群组
-put /teams/:teamId 编辑群组
-get /teams/user/:userId 获取个人群组列表(TODO)
-get /teams/company 获取公司群组列表
-get /teams/search 搜索群组
-put /teams/:teamId/user/:userId 加入群组
-delete /teams/:teamId/user/:userId 退出群组
-post /teams/:teamsId/invite 群组邀请
+post /teams 发新群组 
+
+delete /teams/:teamId 删除群组 
+
+put /teams/:teamId 编辑群组 
+
+get /teams/user/:userId 获取个人群组列表
+
+get /teams/company 获取公司群组列表 
+
+get /teams/search 搜索群组 
+
+put /teams/:teamId/user/:userId 加入群组 
+
+delete /teams/:teamId/user/:userId 退出群组 
+
+post /teams/:teamsId/invite 群组邀请 
 
 ## 数据模型
 新添加1个集合: CompanyGroup.
